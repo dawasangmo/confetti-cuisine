@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import path from "path";
 import { fileURLToPath } from "url";
 import "dotenv/config";
+import helmet from "helmet"
 
 /* ------------------------------------------------------------------ */
 /* Setup paths and Express app */
@@ -37,7 +38,7 @@ app.use(express.json());
 app.use(layouts);
 app.use(express.static(path.join(__dirname, "public")));
 
-/* ------------------------------------------------------------------ */
+
 /* Routes */
 app.get("/", (req, res) => res.render("index"));
 app.get("/courses", homeController.showCourses);
@@ -48,7 +49,7 @@ app.get("/contact", (req, res) => res.redirect("/subscribers/new"));
 // Subscribers routes
 app.use("/subscribers", subscribersRouter);
 
-/* ------------------------------------------------------------------ */
+
 /* Error handlers */
 app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);
