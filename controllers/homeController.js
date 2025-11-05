@@ -1,30 +1,26 @@
-"use strict";
+// controllers/homeController.js
 
-var courses = [
-  {
-    title: "Event Driven Cakes",
-    cost: 50
-  },
-  {
-    title: "Asynchronous Artichoke",
-    cost: 25
-  },
-  {
-    title: "Object Oriented Orange Juice",
-    cost: 10
-  }
-];
-
-exports.showCourses = (req, res) => {
+const showCourses = (req, res) => {
   res.render("courses", {
-    offeredCourses: courses
+    offeredCourses: [
+      { title: "Event Planning", cost: 50 },
+      { title: "Cake Decorating", cost: 75 },
+      { title: "Cooking with Confetti", cost: 40 }
+    ]
   });
 };
 
-exports.showSignUp = (req, res) => {
+const showSignUp = (req, res) => {
   res.render("contact");
 };
 
-exports.postedSignUpForm = (req, res) => {
+const postedSignUpForm = (req, res) => {
+  console.log(req.body);
   res.render("thanks");
+};
+
+export default {
+  showCourses,
+  showSignUp,
+  postedSignUpForm
 };
