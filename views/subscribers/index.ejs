@@ -1,0 +1,32 @@
+<main class="container">
+  <h1>Subscribers List</h1>
+
+  <p><a class="button" href="/subscribers/new">Add New Subscriber</a></p>
+
+  <% if (subscribers && subscribers.length) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Zip Code</th>
+          <th>Street Address</th>
+          <th>VIP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% subscribers.forEach(s => { %>
+          <tr>
+            <td><%= s.name %></td>
+            <td><%= s.email %></td>
+            <td><%= s.zipCode %></td>
+            <td><%= s.streetAddress %></td>
+            <td><%= s.vip ? "Yes" : "No" %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p>No subscribers yet.</p>
+  <% } %>
+</main>
