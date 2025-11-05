@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(layouts);
 app.use(express.static(path.join(__dirname, "public")));
-
+app.use(helmet());
 
 /* Routes */
 app.get("/", (req, res) => res.render("index"));
