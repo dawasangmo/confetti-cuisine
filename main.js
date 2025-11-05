@@ -1,21 +1,23 @@
-"use strict";
+import express from "express";
+import layouts from "express-ejs-layouts";
+import homeController from "./controllers/homeController.js";
+import errorController from "./controllers/errorController.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import "dotenv/config";
 
-const express = require("express"),
-  app = express(),
-  homeController = require("./controllers/homeController"),
-  errorController = require("./controllers/errorController"),
-  layouts = require("express-ejs-layouts");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
-app.set("port", process.env.PORT || 3000);
-app.use(
-  express.urlencoded({
-    extended: false
-  })
-);
+app.set("port", PORT);
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(layouts);
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -28,6 +30,6 @@ app.post("/contact", homeController.postedSignUpForm);
 app.use(errorController.pageNotFoundError);
 app.use(errorController.internalServerError);
 
-app.listen(app.get("port"), () => {
-  console.log(`Server running at http://localhost:${app.get("port")}`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
